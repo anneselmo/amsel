@@ -26,8 +26,11 @@ def insert_modules(text, specifics):
     return(text)
 
 def gen(path, dest):
-    try os.mkdir(dest)
     global universals
+    try:
+        os.makedirs(dest)
+    except:
+        pass
     try:
         universals=load_json(path+"/config.json")
         with open(path+"/style.css", 'r') as css:
@@ -40,7 +43,7 @@ def gen(path, dest):
         return("done")
 
 
-def write_page(specifics, dest)
+def write_page(specifics, dest):
     try:
         with open(path+"/"+source, 'r') as inp:
             out=insert_modules(inp.read(), specifics)
