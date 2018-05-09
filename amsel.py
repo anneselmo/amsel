@@ -32,6 +32,21 @@ def insert_modules(text, cats):
         i=i+1
     return(text)
 
+def run_commands(inp):
+    i=0
+    inp=inp.split("[")
+    text, out=[], ""
+    for value in inp:
+        for part in value.split("]"):
+            text.append(part)
+    for value in text:
+        if value.startswith("!") and value.endswith("!"):
+           text[i]=exec("scripts."+(value.replace("!", "")))
+        i=i+1 
+    for value in text:
+        out=out+str(value)
+    return(out)
+
 def build_framework(path, dest, cats):
     targets=[]
     loc=os.path.abspath(".")
@@ -83,9 +98,6 @@ def dprint(d):
     for key in d:
         print(key, d[key])
     return("fish")
-
-def run_commands(inp):
-    return(inp)
 
 def write_page(source, dest, cats):
     print("wee")
