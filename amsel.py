@@ -21,7 +21,7 @@ def scan_html(html):
 def insert_modules(text, cats):
     for module in universals:
         text=text.replace("{{"+module+"}}", universals[module])
-    for cat  in cats
+    for cat  in cats:
         for submod in universals[cat]:
             text=text.replace("{{"+module+"}}", universals[cat][module])
     return(text)
@@ -39,11 +39,12 @@ def gen(path, dest):
         write_page(dest+item.replace(code, "html"), code)
     return("done")
 
-def load_config(path, [cats]):
+def load_config(path, cats):
     print("conf")
     out={}
-    for thing in utils.recursive_scan(cat+".conf", [path]):
-        out[thing.replace(cat+".conf", "")]=utils.file_dump(thing)
+    for cat in cats:
+        for thing in utils.recursive_scan(cat+".conf", [path]):
+            out[thing.replace(".conf", "")]=utils.file_dump(thing)
     try:
         out.update(load_json(path+"/config.json"))
     except:
