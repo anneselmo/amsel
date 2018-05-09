@@ -20,14 +20,19 @@ def scan_html(html):
        
 def insert_modules(text, cats):
     for module in universals:
-        text=text.replace("{{"+module+"}}", universals[module])
+        print(module, "XXQ")
+        if module not in cats:
+            text=text.replace("{{"+module+"}}", universals[module])
     for cat in cats:
-        print(type(cat), cat)
-        try:
-            for submod in universals[cat]:
-                text=text.replace("{{"+module+"}}", universals[cat][module])
-        except:
-            pass
+        print(cat, "XXS")
+        for submod in universals[cat]:
+            print(submod, "XXJ")
+            text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
+    for cat in cats:
+        print(cat, "XXS")
+        for submod in universals[cat]:
+            print(submod, "XXJ")
+            text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
     return(text)
 
 def gen(path, dest):
@@ -38,12 +43,8 @@ def gen(path, dest):
     except:
         pass
     universals=load_config(path, cats)
-    dprint(universals)
     for cat in cats:
         for item in utils.recursive_scan(cat, [path]):
-            print(item)
-            print("FISH")
-            print(dest+item.replace(cat, "html").replace(path, dest))
             write_page(item, item.replace(cat, "html").replace(path, dest), cats)
     return("done")
 
@@ -51,12 +52,16 @@ def load_config(path, cats):
     print("conf")
     out={}
     for cat in cats:
+        print(cat)
         out[cat]={}
         for thing in utils.recursive_scan(cat+".conf", [path]):
             name=thing.replace(cat+".conf", "")
             name=str(name).split("/")
-            print(name)
-            print(name[-1:][0][:-1])
+            try:
+                data=load_json(thing)
+            except:
+                data=utils.file_dump(thing)
+            print(name[-1:][0][:-1], "DISHFISH")
             out[cat][name[-1:][0][:-1]]=utils.file_dump(thing)
     try:
         out.update(load_json(path+"/config.json"))
