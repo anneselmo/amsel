@@ -19,7 +19,10 @@ def scan_html(html):
     return(index)
        
 def insert_modules(text, cats):
-    while text.contains("{{") is True:
+    i=0
+    while "{{" in text:
+        if i > 10:
+            return(text)
         for module in universals:
             print(module, "XXQ")
             if module not in cats:
@@ -29,16 +32,27 @@ def insert_modules(text, cats):
             for submod in universals[cat]:
                 print(submod, "XXJ")
                 text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
-               text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
+        i=i+1
     return(text)
+
+def build_framework(path, dest, cats):
+    targets=[]
+    for cat in cats:
+        targets.extend(utils.recursive_scan(cat, [path]))
+
+    for target in targets:
+        things=target.replace(path, dest).split("/").replace(cat, "html")
+        for thing in things:
+            if len(thing.split(".")) > 1:
+                os.makedirs(thing)
+            else:
+                open(thing, 'a').close()
+    print(targets)
 
 def gen(path, dest):
     global universals
     cats=["proto", "site"]
-    try:
-        os.makedirs(dest)
-    except:
-        pass
+    build_framework(path, dest, cats)
     universals=load_config(path, cats)
     for cat in cats:
         for item in utils.recursive_scan(cat, [path]):
@@ -86,4 +100,4 @@ def write_page(source, dest, cats):
     #except:
     #    return(1)
 
-gen("./in", "./out")
+#gen("./in", "./out")
