@@ -21,22 +21,30 @@ def scan_html(html):
 def insert_modules(text, cats):
     for module in universals:
         text=text.replace("{{"+module+"}}", universals[module])
-    for cat  in cats:
-        for submod in universals[cat]:
-            text=text.replace("{{"+module+"}}", universals[cat][module])
+    for cat in cats:
+        print(type(cat), cat)
+        try:
+            for submod in universals[cat]:
+                text=text.replace("{{"+module+"}}", universals[cat][module])
+        except:
+            pass
     return(text)
 
 def gen(path, dest):
     global universals
-    code="proto"
+    cats=["proto", "site"]
     try:
         os.makedirs(dest)
     except:
         pass
-    universals=load_config(path, code)
-    print(universals)
-    for item in utils.recursive_scan(code, [path]):
-        write_page(dest+item.replace(code, "html"), code)
+    universals=load_config(path, cats)
+    dprint(universals)
+    for cat in cats:
+        for item in utils.recursive_scan(cat, [path]):
+            print(item)
+            print("FISH")
+            print(dest+item.replace(cat, "html").replace(path, dest))
+            write_page(item, item.replace(cat, "html").replace(path, dest), cats)
     return("done")
 
 def load_config(path, cats):
@@ -44,22 +52,40 @@ def load_config(path, cats):
     out={}
     for cat in cats:
         for thing in utils.recursive_scan(cat+".conf", [path]):
-            out[thing.replace(".conf", "")]=utils.file_dump(thing)
+            print(type(thing))
+            name=thing.replace(".conf", "")
+
+            print(name)
+            name=str(name).split("/")
+            print(name)
+            print(thing)
+
+            print(name[-1:])
+            out[name[-1:][0]]=utils.file_dump(thing)
     try:
         out.update(load_json(path+"/config.json"))
     except:
         pass
     return(out)
 
-def write_page(dest, cats):
-    try:
-        with open(path+"/"+source, 'r') as inp:
-            out=insert_modules(inp.read(), [cats])
-            out=run_commands(out)
-        with open(outpath+"/"+dest, 'w') as fin:
-            fin.write(out)
-        return(0)
-    except:
-        return(1)
+def dprint(d):
+    for key in d:
+        print(key, d[key])
+    return("fish")
+
+def run_commands(inp):
+    return(inp)
+
+def write_page(source, dest, cats):
+    print("wee")
+    #try:
+    with open(source, 'r') as inp:
+        out=insert_modules(inp.read(), cats)
+        out=run_commands(out)
+    with open(dest, 'w') as fin:
+        fin.write(out)
+    return(0)
+    #except:
+    #    return(1)
 
 gen("./in", "./out")
