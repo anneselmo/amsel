@@ -27,21 +27,26 @@ def insert_modules(text, specifics):
 
 def gen(path, dest):
     global universals
+    code="proto"
     try:
         os.makedirs(dest)
     except:
         pass
-    try:
-        universals=load_json(path+"/config.json")
-        with open(path+"/style.css", 'r') as css:
-            universals[css]=css.read()
-    except:
-        print("/me kindly requests a config.json")
-        exit()
-    for item in utils.recursive_scan("proto", path):
-        write_page(find_specifcs(item), dest+item.replace("proto", "html"))
-        return("done")
+    universals=load_config(path, code)
+    for item in utils.recursive_scan(code, [path]):
+        write_page(find_specifcs(item), dest+item.replace(code, "html"))
+    return("done")
 
+def load_config(path, cat):
+    print("conf")
+    out={}
+    for thing in utils.recursive_scan(cat+".conf", [path]):
+        out[thing.replace(cat+".conf", "")]=utils.file_dump(thing)
+    try:
+        out.update(load_json(path+"/config.json"))
+    except:
+        pass
+    return(out)
 
 def write_page(specifics, dest):
     try:
