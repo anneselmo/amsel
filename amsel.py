@@ -19,20 +19,17 @@ def scan_html(html):
     return(index)
        
 def insert_modules(text, cats):
-    for module in universals:
-        print(module, "XXQ")
-        if module not in cats:
-            text=text.replace("{{"+module+"}}", universals[module])
-    for cat in cats:
-        print(cat, "XXS")
-        for submod in universals[cat]:
-            print(submod, "XXJ")
-            text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
-    for cat in cats:
-        print(cat, "XXS")
-        for submod in universals[cat]:
-            print(submod, "XXJ")
-            text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
+    while text.contains("{{") is True:
+        for module in universals:
+            print(module, "XXQ")
+            if module not in cats:
+                text=text.replace("{{"+module+"}}", universals[module])
+        for cat in cats:
+            print(cat, "XXS")
+            for submod in universals[cat]:
+                print(submod, "XXJ")
+                text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
+               text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
     return(text)
 
 def gen(path, dest):
