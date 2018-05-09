@@ -18,11 +18,12 @@ def scan_html(html):
 
     return(index)
        
-def insert_modules(text, specifics):
+def insert_modules(text, cats):
     for module in universals:
         text=text.replace("{{"+module+"}}", universals[module])
-    for module in specifics:
-        text=text.replace("{{"+module+"}}", specifics[module])
+    for cat  in cats
+        for submod in universals[cat]:
+            text=text.replace("{{"+module+"}}", universals[cat][module])
     return(text)
 
 def gen(path, dest):
@@ -33,11 +34,12 @@ def gen(path, dest):
     except:
         pass
     universals=load_config(path, code)
+    print(universals)
     for item in utils.recursive_scan(code, [path]):
-        write_page(find_specifcs(item), dest+item.replace(code, "html"))
+        write_page(dest+item.replace(code, "html"), code)
     return("done")
 
-def load_config(path, cat):
+def load_config(path, [cats]):
     print("conf")
     out={}
     for thing in utils.recursive_scan(cat+".conf", [path]):
@@ -48,16 +50,15 @@ def load_config(path, cat):
         pass
     return(out)
 
-def write_page(specifics, dest):
+def write_page(dest, cats):
     try:
         with open(path+"/"+source, 'r') as inp:
-            out=insert_modules(inp.read(), specifics)
+            out=insert_modules(inp.read(), [cats])
             out=run_commands(out)
         with open(outpath+"/"+dest, 'w') as fin:
             fin.write(out)
         return(0)
     except:
         return(1)
-
 
 gen("./in", "./out")
