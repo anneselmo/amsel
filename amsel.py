@@ -51,17 +51,13 @@ def load_config(path, cats):
     print("conf")
     out={}
     for cat in cats:
+        out[cat]={}
         for thing in utils.recursive_scan(cat+".conf", [path]):
-            print(type(thing))
-            name=thing.replace(".conf", "")
-
-            print(name)
+            name=thing.replace(cat+".conf", "")
             name=str(name).split("/")
             print(name)
-            print(thing)
-
-            print(name[-1:])
-            out[name[-1:][0]]=utils.file_dump(thing)
+            print(name[-1:][0][:-1])
+            out[cat][name[-1:][0][:-1]]=utils.file_dump(thing)
     try:
         out.update(load_json(path+"/config.json"))
     except:
