@@ -4,7 +4,7 @@ import os
 import cdbx
 import json
 
-def recursive_scan(extension, directories):
+def recursive_scan(extension, directories):# takes a LIST
     filelist=[]
     for directory in directories:
         for (root, dirnames, filenames) in os.walk(directory):
@@ -67,3 +67,7 @@ def cdb2dict(tfile):
     for key in cdb.keys(all=True):
         ndict[key]=cdb[key]
     return(ndict)
+
+def file_dump(path):
+    with open(path, 'r') as thing:
+        return(thing.read())
