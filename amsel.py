@@ -3,6 +3,7 @@ import os
 import json
 
 import utils
+import scripts
 
 def load_json(temp):
     with open(temp, 'r') as late:
@@ -34,6 +35,7 @@ def insert_modules(text, cats):
 
 def run_commands(inp):
     i=0
+    print(root, "ROOT")
     inp=inp.split("[")
     text, out=[], ""
     for value in inp:
@@ -41,6 +43,8 @@ def run_commands(inp):
             text.append(part)
     for value in text:
         if value.startswith("!") and value.endswith("!"):
+           print(exec("scripts."+(value.replace("!", ""))))
+
            text[i]=exec("scripts."+(value.replace("!", "")))
         i=i+1 
     for value in text:
@@ -65,7 +69,11 @@ def build_framework(path, dest, cats):
     return(0)
 
 def gen(path, dest):
-    global universals
+    global universals 
+    global root
+    global absroot
+    root=dest
+    absroot=os.path.abspath(root)
     cats=["proto", "site"]
     build_framework(path, dest, cats)
     universals=load_config(path, cats)
