@@ -24,30 +24,30 @@ def insert_modules(text, cats):
         if i > 10:
             return(text)
         for module in universals:
-            print(module, "XXQ")
             if module not in cats:
                 text=text.replace("{{"+module+"}}", universals[module])
         for cat in cats:
-            print(cat, "XXS")
             for submod in universals[cat]:
-                print(submod, "XXJ")
                 text=text.replace("{{"+cat+"."+submod+"}}", universals[cat][submod])
         i=i+1
     return(text)
 
 def build_framework(path, dest, cats):
     targets=[]
+    loc=os.path.abspath(".")
     for cat in cats:
         targets.extend(utils.recursive_scan(cat, [path]))
-
     for target in targets:
-        things=target.replace(path, dest).split("/").replace(cat, "html")
-        for thing in things:
-            if len(thing.split(".")) > 1:
-                os.makedirs(thing)
-            else:
-                open(thing, 'a').close()
-    print(targets)
+        target=target.replace(path, dest)
+        build=os.path.abspath(target).rsplit("/", 1)
+        for cat in cats:
+            if cat in build[1]:
+                build[1]=build[1].replace(cat, "html")
+        try:
+            os.makedirs(build[0])
+        except:
+            open(build[1], 'a').close()
+    return(0)
 
 def gen(path, dest):
     global universals
@@ -72,7 +72,6 @@ def load_config(path, cats):
                 data=load_json(thing)
             except:
                 data=utils.file_dump(thing)
-            print(name[-1:][0][:-1], "DISHFISH")
             out[cat][name[-1:][0][:-1]]=utils.file_dump(thing)
     try:
         out.update(load_json(path+"/config.json"))
@@ -100,4 +99,4 @@ def write_page(source, dest, cats):
     #except:
     #    return(1)
 
-#gen("./in", "./out")
+gen("./in", "./out")
