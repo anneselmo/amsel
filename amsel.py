@@ -47,27 +47,25 @@ def run_commands(inp):
 
            text[i]=eval("scripts."+(value.replace("!", "")))
         i=i+1 
+
     for value in text:
         out=out+str(value)
     return(out)
 
 def build_framework(path, dest, cats):
-    targets=[]
-    loc=os.path.abspath(".")
+    print(cats)
     for cat in cats:
-        targets.extend(utils.recursive_scan(cat, [path]))
-    for target in targets:
-        target=target.replace(path, dest)
-        build=os.path.abspath(target).rsplit("/", 1)
-        try:
-            os.makedirs(build[0])
-        except:
-            for cat in cats:
-                if cat in target.split("/")[-1:]:
-                    tfile='html'.join(target.rsplit(cat, 1))
-                    open(tfile, 'a').close()
-                else:
-                    open(target, 'a').close()
+        for item in utils.recursive_scan(cat, [path]):
+            item=item.replace(path, dest)
+            item=item.replace(cat, "html")
+            print(item, "Q")
+            try:
+                open(item, 'a').close()
+            except:
+                build=os.path.abspath(item).rsplit("/", 1)
+                os.makedirs(build[0])
+                open(item, 'a').close()
+
     return(0)
 
 def gen(path, dest):
@@ -118,7 +116,5 @@ def write_page(source, dest, cats):
     with open(dest, 'w') as fin:
         fin.write(out)
     return(0)
-    #except:
-    #    return(1)
 
 gen("./in", "./out")
