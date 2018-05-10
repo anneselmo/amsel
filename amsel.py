@@ -43,9 +43,9 @@ def run_commands(inp):
             text.append(part)
     for value in text:
         if value.startswith("!") and value.endswith("!"):
-           print(exec("scripts."+(value.replace("!", ""))))
+           print(eval("scripts."+(value.replace("!", ""))))
 
-           text[i]=exec("scripts."+(value.replace("!", "")))
+           text[i]=eval("scripts."+(value.replace("!", "")))
         i=i+1 
     for value in text:
         out=out+str(value)
@@ -59,13 +59,15 @@ def build_framework(path, dest, cats):
     for target in targets:
         target=target.replace(path, dest)
         build=os.path.abspath(target).rsplit("/", 1)
-        for cat in cats:
-            if cat in build[1]:
-                build[1]=build[1].replace(cat, "html")
         try:
             os.makedirs(build[0])
         except:
-            open(build[1], 'a').close()
+            for cat in cats:
+                if cat in target.split("/")[-1:]:
+                    tfile='html'.join(target.rsplit(cat, 1))
+                    open(tfile, 'a').close()
+                else:
+                    open(target, 'a').close()
     return(0)
 
 def gen(path, dest):
