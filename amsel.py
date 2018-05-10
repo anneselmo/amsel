@@ -11,7 +11,6 @@ def load_json(temp):
 
 def scan_html(html):
     index=[]
-
     for item in html.split("{{"):
         if "}" in item:
             for line in item.split("\n"):
@@ -109,7 +108,6 @@ def dprint(d):
 
 def write_page(source, dest, cats):
     print("wee")
-    #try:
     with open(source, 'r') as inp:
         out=insert_modules(inp.read(), cats)
         out=run_commands(out)
