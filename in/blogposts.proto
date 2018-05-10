@@ -2,4 +2,7 @@
 
 this is going to be the blogposts page
 
+[!gen_index(absroot+"/posts/", root)!]
+
+
 {{proto.tail}}
