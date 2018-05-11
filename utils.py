@@ -4,6 +4,8 @@ import os
 import cdbx
 import json
 
+from PIL import Image
+
 def recursive_scan(extension, directories):# takes a LIST
     filelist=[]
     for directory in directories:
@@ -71,3 +73,9 @@ def cdb2dict(tfile):
 def file_dump(path):
     with open(path, 'r') as thing:
         return(thing.read())
+
+def resize_image(image, width, output):
+    target = Image.open(image)
+    height = int(target.size[1]*(width/target.size[0]))
+    img.resize((width,height), Image.ANTIALIAS).save(output)
+    return(0)
