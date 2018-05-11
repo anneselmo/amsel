@@ -1,6 +1,6 @@
 {{proto.base}}
 
-this is going to be the blogposts page
+Listing of blogposts, in I hope a reasonable sequential order.
 
 [!gen_blog_index(absroot+"/posts/", "/posts/")!]
 
