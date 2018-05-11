@@ -2,6 +2,8 @@
 import os
 import json
 
+from shutil import copyfile
+
 import utils
 import scripts
 
@@ -56,7 +58,10 @@ def build_framework(path, dest, cats):
     for cat in cats:
         for item in utils.recursive_scan(cat, [path]):
             item=item.replace(path, dest)
-            item=item.replace(cat, "html")
+            if cat not in ["png", "jpg"]:
+                item=item.replace(cat, "html")
+            else:
+                pass
             print(item, "Q")
             try:
                 open(item, 'a').close()
@@ -73,12 +78,15 @@ def gen(path, dest):
     global absroot
     root=dest
     absroot=os.path.abspath(root)
-    cats=["proto", "site"]
+    cats=["proto", "site", "png"]
     build_framework(path, dest, cats)
     universals=load_config(path, cats)
     for cat in cats:
         for item in utils.recursive_scan(cat, [path]):
-            write_page(item, item.replace(cat, "html").replace(path, dest), cats)
+            if cat in ["png", "jpg"]:
+                copyfile(item, item.replace(path, dest))               
+            else:
+                write_page(item, item.replace(cat, "html").replace(path, dest), cats)
     return("done")
 
 def load_config(path, cats):

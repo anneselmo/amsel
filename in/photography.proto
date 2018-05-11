@@ -1,0 +1,7 @@
+{{proto.base}}
+{{proto.gallery}}
+<p>
+this will become a photography page and gallery 
+</p>
+[!gen_gallery(absroot+"/img/", "/img/", absroot+"/timg/", "/timg/")!]
+{{proto.tail}}

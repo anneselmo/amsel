@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 import os
+import utils
 
 #scripts that can be run inside of pages
 
@@ -21,4 +22,13 @@ def gen_blog_index(path, root):
         index=index+item.split(".")[0]+"<br>"
     return(index)
 
+def gen_gallery(path, root, tpath, ntpath):
+    index="""<div class="container"> <div class="gallery">"""
+    flist=os.listdir(path)
+    tflist=os.listdir(tpath)
+    for item in flist:
+        if item in tflist:
+            index=index+"""<a href='"""+root+item+"""' target='_blank'><img src='"""+ntpath+item+"""'></a>"""
+    index=index+"</div></div>"
+    return(index)
 
