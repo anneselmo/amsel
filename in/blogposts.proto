@@ -1,8 +1,8 @@
 {{proto.base}}
-
+<text>
 Listing of blogposts, in I hope a reasonable sequential order.
 
 [!gen_blog_index(absroot+"/posts/", "/posts/")!]
-
+</text>
 
 {{proto.tail}}
