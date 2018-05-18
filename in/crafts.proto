@@ -2,7 +2,7 @@
 {{proto.gallery}}
 <div class="text">
 <p>
-Some images of things I've made, here mostly books and gnomes.
+Some images of things I've made.
 </p>
 </div class="text">
 [!gen_gallery(absroot+"/crafts/", "/crafts/", absroot+"/tcrafts/", "/tcrafts/")!]
