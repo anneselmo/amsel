@@ -1,0 +1,24 @@
+{{proto.base}}
+{{proto.gallery}}
+<div class="text">
+<p>
+Glitch art, is, as far as I can see, is essentially some form of media, that is produced through using unconventional tools for that medium (or using tools unconventionally). <br>
+Quite what this means in practice is rather open ended, but perhaps thats part of the fun.
+</p>
+<h2>How I make images </h2>
+<p>
+The vast majority of images I make are with photos I've taken, using . . . one of the several cameras I've used over the last several years. 
+Most of them are from near places I lived, for a time at least.
+</p>
+<h3>Mainly. . . .</h3>
+<p>
+Mainly these are made in a combination of a few programs. 
+Typically, I always use [!gen_link("https://gimp.org", "the gimp")!], for basic colour changing and aligning and an awful lot of other things.
+As often I shoot in raw, I use either [!gen_link("http://darktable.org/", "darktable")!] or [!gen_link("http://ufraw.sourceforge.net/", "ufraw")!] for processing into a gimp friendly format. 
+Additionally, I use [!gen_link("https://www.audacityteam.org/", "audacity")!] for many of the more exotic filters, [!gen_link("http://hugin.sourceforge.net/", "hugin")!] for stitching multiple images together (sometimes), [!gen_link("https://www.vim.org/", "vim")!], ed (the standard editor), pipes and sed and other general unix tools to get other effects.
+<h3>PLANETS IN THE SKY</h3>
+<p>
+A few feature planets or planet like objects in the sky.
+These are made in [!gen_link("https://www.blender.org/", "blender")!], out of textures made in [!gen_link("https://gimp.org", "the gimp")!] and [!gen_link("https://krita.org", "krita")!], generally using data derived from [!gen_link("https://www.mapaplanet.org/", "USGS topographical maps")!] of the Moon and other objects.</p>
+
+{{proto.tail}}
