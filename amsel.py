@@ -44,7 +44,7 @@ def run_commands(inp):
             text.append(part)
     for value in text:
         if value.startswith("!") and value.endswith("!"):
-           print(eval("scripts."+(value.replace("!", ""))))
+           #print(eval("scripts."+(value.replace("!", ""))))
 
            text[i]=eval("scripts."+(value.replace("!", "")))
         i=i+1 
@@ -116,10 +116,10 @@ def dprint(d):
 
 def write_page(source, dest, cats):
     print("wee")
-    with open(source, 'r') as inp:
+    with open(source, 'r', encoding='utf-8') as inp:
         out=insert_modules(inp.read(), cats)
         out=run_commands(out)
-    with open(dest, 'w') as fin:
+    with open(dest, 'w', encoding='utf-8') as fin:
         fin.write(out)
     return(0)
 
