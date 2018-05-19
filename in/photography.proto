@@ -1,14 +1,8 @@
 {{proto.base}}
 {{proto.gallery}}
-<<<<<<< HEAD
-[!gen_link("glitch.html", ". . . . . . . .")!]. 
-=======
 <div class="text">
 <p>
-I've long had an interest in photography and image editing. Over the last few years I've made a more serious hobby of it, and have put together a lot of things that fit into what people often call [!gen_link("glitch.html", ''glitchart'')!]. 
-Here is a selection of some such images:
-
->>>>>>> parent of 5e5b634... fixed typo
+[!gen_link("glitch.html", "¿?")!] 
 </p>
 </div class="text">
 [!gen_gallery(absroot+"/img/", "/img/", absroot+"/timg/", "/timg/")!]
