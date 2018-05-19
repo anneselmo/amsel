@@ -1,6 +1,6 @@
 {{proto.base}}
 {{proto.gallery}}
-[!gen_link("glitch.html", ". . . . . . . ."!]. 
+[!gen_link("glitch.html", ". . . . . . . .")!]. 
 </p>
 </div class="text">
 [!gen_gallery(absroot+"/img/", "/img/", absroot+"/timg/", "/timg/")!]
