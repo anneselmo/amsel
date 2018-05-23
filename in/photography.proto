@@ -5,5 +5,5 @@
 [!gen_link("glitch.html", "¿?")!] 
 </p>
 </div class="text">
-[!gen_gallery(absroot+"/img/", "/img/", absroot+"/timg/", "/timg/")!]
+[!neo_gen_gallery("/img/", "/img/", "/timg/", source, absroot)!]
 {{proto.tail}}

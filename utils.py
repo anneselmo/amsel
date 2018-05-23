@@ -75,7 +75,15 @@ def file_dump(path):
         return(thing.read())
 
 def resize_image(image, width, output):
+    print(image, width, output)
     target = Image.open(image)
     height = int(target.size[1]*(width/target.size[0]))
-    target.resize((width,height), Image.ANTIALIAS).save(output)
+    try:
+        print("squish")
+        target.resize((width,height), Image.ANTIALIAS).save(output)
+    except:
+        print("woop")
+        build=os.path.abspath(output).rsplit("/", 1)
+        os.makedirs(build[0])
+        target.resize((width,height), Image.ANTIALIAS).save(output)
     return(0)

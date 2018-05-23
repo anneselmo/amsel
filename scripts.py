@@ -32,12 +32,15 @@ def gen_gallery(path, root, tpath, ntpath):
     index=index+"</div></div>"
     return(index)
 
-def neo_gen_gallery(source, fdest, tdest):
+def neo_gen_gallery(sdir, fdest, tdest, source, absroot):
     index="""<div class="container"> <div class="gallery">"""
-    flist=os.listdir(source)
-    for item in source:
+    print("SOURCE", source)
+    print("SDIR", sdir)
+    flist=os.listdir(source+sdir)
+    for item in flist:
+        print(item, "X")
         try:
-            utils.resize_image(source+item, 1200, absroot+tdest+item)
+            utils.resize_image(source+sdir+item, 1200, absroot+tdest+item)
             index=index+"""<a href='"""+fdest+item+"""' target='_blank'><img src='"""+tdest+item+"""'></a>"""
         except:
             pass
