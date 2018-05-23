@@ -76,6 +76,8 @@ def gen(path, dest):
     global universals 
     global root
     global absroot
+    global source
+    source=path
     root=dest
     absroot=os.path.abspath(root)
     cats=["proto", "site", "png"]
@@ -114,9 +116,9 @@ def dprint(d):
         print(key, d[key])
     return("fish")
 
-def write_page(source, dest, cats):
+def write_page(spage, dest, cats):
     print("wee")
-    with open(source, 'r', encoding='utf-8') as inp:
+    with open(spage, 'r', encoding='utf-8') as inp:
         out=insert_modules(inp.read(), cats)
         out=run_commands(out)
     with open(dest, 'w', encoding='utf-8') as fin:
