@@ -77,5 +77,5 @@ def file_dump(path):
 def resize_image(image, width, output):
     target = Image.open(image)
     height = int(target.size[1]*(width/target.size[0]))
-    img.resize((width,height), Image.ANTIALIAS).save(output)
+    target.resize((width,height), Image.ANTIALIAS).save(output)
     return(0)
