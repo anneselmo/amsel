@@ -46,3 +46,9 @@ def neo_gen_gallery(sdir, fdest, tdest, source, absroot):
             pass
     index=index+"</div></div>"
     return(index)
+
+def insert_image(image, timage):
+    html="<div class='image'>"
+    html=html+"""<a href='"""+image+"""' target='_blank'><img src'"""+timage+"""'></a>"""
+    html=html+"</div>"
+    return(html)
