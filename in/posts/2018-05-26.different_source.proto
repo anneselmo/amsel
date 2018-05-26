@@ -1,6 +1,7 @@
 {{proto.base}}
 <div class='container'>
 <p>
+[!insert_image("/img/flight.png", "/timg/flight.png")!]
 Usually all the images I post are made from my own photographs, in this recent
 update to the gallery here I added an image that breaks that trend however, and
 was instead taken by a friend of mine on a recent trip.
@@ -12,7 +13,6 @@ shift was too great, which of course screws with proper panorama-making.
 This image was generated from three photographs taken from airplane during
 takeoff, merged together with hugin, and with a bit of work with xxd, sort, and
 the gimp. 
-[!insert_image("/img/flight.png", "/timg/flight.png")!]
 </p>
 </div>
 {{proto.tail}}
